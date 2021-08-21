@@ -1,28 +1,48 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <!-- <div id="nav"><router-link to="/">Home</router-link> |</div> -->
+    <router-view />
   </div>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
+<style lang="scss">
+@import url("https://use.typekit.net/ghr2zdi.css");
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
-</script>
 
-<style>
+body {
+  font-family: myriad-pro, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  background-image: url("assets/img/red_abstract_bg.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 100vh;
+}
+
+::-webkit-scrollbar {
+  background: #ffffff;
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #354053;
+}
+
+.positive {
+  color: #7fbf3f;
+}
+
+.negative {
+  color: #f50303;
 }
 </style>
