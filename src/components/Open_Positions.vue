@@ -1,63 +1,152 @@
 <template>
   <div id="open-positions">
-    <div>
+    <div class="main-element-header">
       <h5 class="main-h5">Open Positions</h5>
       <h6>Total: <span id="total-open-positions">7</span></h6>
     </div>
 
-    <div id="strategy-row">
-      <span>Strategy1</span>
-      <span>Strategy2</span>
-      <span>Strategy3</span>
-      <span>Strategy4</span>
-      <span>Strategy5</span>
-      <span>Strategy6</span>
-    </div>
-    <div id="strategy-list">
-      <ol>
-        <li>abcd</li>
-        <li>abcd</li>
-        <li>abcd</li>
-        <li>abcd</li>
-      </ol>
-      <ol>
-        <li>abcd</li>
-        <li>abcd</li>
-        <li>abcd</li>
-        <li>abcd</li>
-        <li>abcd</li>
-        <li>abcd</li>
-        <li>abcd</li>
-        <li>abcd</li>
-        <li>abcd</li>
-        <li>abcd</li>
-        <li>abcd</li>
-        <li>abcd</li>
-      </ol>
-      <ol>
-        <li>abcd</li>
-        <li>abcd</li>
-        <li>abcd</li>
-        <li>abcd</li>
-      </ol>
-      <ol>
-        <li>abcd</li>
-        <li>abcd</li>
-        <li>abcd</li>
-        <li>abcd</li>
-      </ol>
-      <ol>
-        <li>abcd</li>
-        <li>abcd</li>
-        <li>abcd</li>
-        <li>abcd</li>
-      </ol>
-      <ol>
-        <li>abcd</li>
-        <li>abcd</li>
-        <li>abcd</li>
-        <li>abcd</li>
-      </ol>
+    <div id="inner-container">
+      <div class="bar">
+        <h6>Strategy1</h6>
+        <ol>
+          <li>abc</li>
+          <li>abc</li>
+          <li>abc</li>
+          <li>abc</li>
+        </ol>
+      </div>
+      <div class="bar">
+        <h6>Strategy1</h6>
+        <ol>
+          <li>abc</li>
+          <li>abc</li>
+          <li>abc</li>
+          <li>abc</li>
+          <li>abc</li>
+          <li>abc</li>
+        </ol>
+      </div>
+      <div class="bar">
+        <h6>10mOOO30mwowow</h6>
+        <ol>
+          <li>abc</li>
+          <li>abc</li>
+          <li>abc</li>
+          <li>abc</li>
+          <li>abc</li>
+          <li>abc</li>
+        </ol>
+      </div>
+      <div class="bar">
+        <h6>Strategy1</h6>
+        <ol>
+          <li>abc</li>
+          <li>abc</li>
+          <li>abc</li>
+          <li>abc</li>
+          <li>abc</li>
+          <li>abc</li>
+        </ol>
+      </div>
+      <div class="bar">
+        <h6>Strategy1</h6>
+        <ol>
+          <li>abc</li>
+          <li>abc</li>
+          <li>abc</li>
+          <li>abc</li>
+          <li>abc</li>
+          <li>abc</li>
+        </ol>
+      </div>
+      <div class="bar">
+        <h6>Strategy1</h6>
+        <ol>
+          <li>abc</li>
+          <li>abc</li>
+          <li>abc</li>
+          <li>abc</li>
+          <li>abc</li>
+          <li>abc</li>
+        </ol>
+      </div>
+      <div class="bar">
+        <h6>Strategy1</h6>
+        <ol>
+          <li>abc</li>
+          <li>abc</li>
+          <li>abc</li>
+          <li>abc</li>
+          <li>abc</li>
+          <li>abc</li>
+        </ol>
+      </div>
+      <div class="bar">
+        <h6>Strategy1</h6>
+        <ol>
+          <li>abc</li>
+          <li>abc</li>
+          <li>abc</li>
+          <li>abc</li>
+          <li>abc</li>
+          <li>abc</li>
+        </ol>
+      </div>
+      <div class="bar">
+        <h6>Strategy1</h6>
+        <ol>
+          <li>abc</li>
+          <li>abc</li>
+          <li>abc</li>
+          <li>abc</li>
+          <li>abc</li>
+          <li>abc</li>
+        </ol>
+      </div>
+      <div class="bar">
+        <h6>Strategy1</h6>
+        <ol>
+          <li>abc</li>
+          <li>abc</li>
+          <li>abc</li>
+          <li>abc</li>
+          <li>abc</li>
+          <li>abc</li>
+        </ol>
+      </div>
+      <div class="bar">
+        <h6>Strategy1</h6>
+        <ol>
+          <li>abc</li>
+          <li>abc</li>
+          <li>abc</li>
+          <li>abc</li>
+          <li>abc</li>
+          <li>abc</li>
+        </ol>
+      </div>
+      <div class="bar">
+        <h6>Strategy1</h6>
+        <ol>
+          <li>abc</li>
+          <li>abc</li>
+          <li>abc</li>
+          <li>abc</li>
+          <li>abc</li>
+          <li>abc</li>
+        </ol>
+      </div>
+      <div class="bar">
+        <h6>Strategy1</h6>
+        <ol>
+          <li>abc</li>
+          <li>abc</li>
+          <li>abc</li>
+          <li>abc</li>
+          <li>abc</li>
+          <li>abc</li>
+        </ol>
+      </div>
     </div>
   </div>
 </template>
@@ -70,35 +159,31 @@ export default {
 
 <style lang="scss" scoped>
 #open-positions {
-    
-  & > div:nth-child(1) {
+  #inner-container {
+    overflow: auto;
+    border: solid 1px $primary-dark;
+    margin-top: 1em;
+    height: 80%;
+
     display: flex;
     justify-content: space-between;
-  }
 
-  #strategy-row {
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-    padding: 0.5em 0 0 0;
-    border-bottom: solid 1px $primary-green;
+    padding: 0 0.5em;
 
-    span {
-      font-size: 0.8rem;
-      letter-spacing: 0.5px;
-    }
-  }
+    .bar {
+      h6 {
+        font-size: 0.9rem;
+        border-bottom: solid 1px $primary-green;
+        margin-left: 1em;
+      }
 
-  #strategy-list {
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-    padding: 0.5em 0;
-
-    ol {
-      margin-left: 0.5em;
-      line-height: 1.5;
-      font-size: 0.8rem;
+      ol {
+        font-size: 0.8rem;
+        line-height: 1.5;
+        margin-top: 0.5em;
+        padding-left: 3em;
+        padding-bottom: 0.5em;
+      }
     }
   }
 }

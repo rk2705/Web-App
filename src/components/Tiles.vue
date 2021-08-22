@@ -12,6 +12,24 @@
       </h5>
     </div>
     <div class="tile">
+      <h5>
+        Account Balance:
+        <span id="account_balance" class="positive">$20,145</span>
+      </h5>
+    </div>
+    <div class="tile">
+      <h5>
+        Rate of Return(30 days):
+        <span id="rate-of-return" class="positive">12.33%</span>
+      </h5>
+    </div>
+    <div class="tile">
+      <h5>
+        Number of Holdings:
+        <span id="number-of-holdings" class="positive">24</span>
+      </h5>
+    </div>
+    <div class="tile">
       <h5>Status: <span id="status" class="positive">Active</span></h5>
     </div>
   </div>
@@ -28,11 +46,18 @@ export default {
   color: white;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  border: solid $dark-red 2px;
 
   @media (min-width: 720px) {
     grid-template-columns: repeat(4, 1fr);
-    border-bottom: solid $dark-red 2px;
+  }
+
+  @media (min-width: 1280px) {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  @media (min-width: 1536px) {
+    grid-template-columns: repeat(7, 1fr);
+    border-bottom: solid 1px $primary-green;
   }
 
   position: sticky;
@@ -51,33 +76,13 @@ export default {
       font-size: 0.75rem;
     }
 
-    &:nth-child(2),
-    &:nth-child(4) {
-      border-left: solid $dark-red 2px;
-    }
-
-    &:nth-child(1),
-    &:nth-child(2) {
-      border-bottom: solid $dark-red 2px;
-    }
-
-    @media (min-width: 720px) {
-      &:nth-child(2),
-      &:nth-child(3),
-      &:nth-child(4) {
-        border-left: solid $dark-red 2px;
-      }
-
-      &:nth-child(1),
-      &:nth-child(2) {
-        border-bottom: none;
-      }
-    }
-
-    &:nth-child(3):hover,
-    &:nth-child(4):hover {
-      opacity: 0.75;
+    &:nth-child(3),
+    &:nth-child(7) {
       cursor: pointer;
+
+      &:hover {
+        opacity: 0.75;
+      }
     }
   }
 }

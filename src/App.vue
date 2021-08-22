@@ -29,12 +29,13 @@ body {
 }
 
 ::-webkit-scrollbar {
-  background: #ffffff;
-  width: 5px;
+  background: rgba(255, 255, 255, 0.5);
+  width: 10px;
+  height: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #354053;
+  background: $primary-dark;
 }
 
 .positive {
