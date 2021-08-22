@@ -51,7 +51,7 @@ export default {
   input[type="text"],
   input[type="password"] {
     border: none;
-    border-bottom: solid 1px white;
+    border-bottom: solid 2px #bc150a;
     font-size: 1rem;
     background: transparent;
     color: rgba(255, 255, 255, 0.75);

@@ -16,7 +16,6 @@
 
 body {
   font-family: myriad-pro, sans-serif;
-  font-weight: 700;
   font-style: normal;
 }
 
@@ -39,10 +38,10 @@ body {
 }
 
 .positive {
-  color: #7fbf3f;
+  color: $primary-green;
 }
 
 .negative {
-  color: #f50303;
+  color: $primary-red;
 }
 </style>
