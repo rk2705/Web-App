@@ -6,8 +6,8 @@
       <div>profit_loss</div>
       <Open_Positions />
       <Strategies />
-      <div>queued</div>
-      <div>forbidden</div>
+      <Queue />
+      <Forbidden />
       <div>best_performers</div>
       <div>worst_performers</div>
     </div>
@@ -18,9 +18,12 @@
 import Tiles from "../components/Tiles.vue";
 import Open_Positions from "../components/Open_Positions.vue";
 import Strategies from "../components/Strategies.vue";
+import Queue from "../components/Queue.vue";
+import Forbidden from "../components/Forbidden.vue";
+
 export default {
   name: "Dashboard",
-  components: { Tiles, Open_Positions, Strategies },
+  components: { Tiles, Open_Positions, Strategies, Queue, Forbidden },
 };
 </script>
 
@@ -30,6 +33,13 @@ export default {
   margin: auto;
   overflow: auto;
   height: 100%;
+  width: 100%;
+
+  .border {
+    border: solid 1px $primary-dark;
+    margin-top: 1em;
+    height: 80%;
+  }
 
   table {
     width: 100%;
@@ -57,18 +67,55 @@ export default {
   }
 
   .container {
-    padding: 1em;
+    padding: 2em;
     height: 100%;
     display: grid;
-    gap: 1em;
-    grid-template-areas:
-      "account_balance account_balance profit_loss profit_loss"
-      "strategies strategies open_positions open_positions"
-      "queued forbidden best_performers worst_performers";
+    gap: 2em;
+    width: 100%;
+    grid-auto-columns: 100%;
 
-    grid-auto-rows: minmax(200px, 275px);
+    @media (min-width: 1300px) {
+      grid-template-areas:
+        "account_balance account_balance profit_loss profit_loss"
+        "strategies strategies open_positions open_positions"
+        "queued forbidden best_performers worst_performers";
 
-    grid-auto-columns: minmax(auto, 1fr);
+      grid-auto-rows: minmax(200px, 275px);
+
+      grid-auto-columns: minmax(auto, 1fr);
+
+      & > div:nth-child(1) {
+        grid-area: account_balance;
+      }
+
+      & > div:nth-child(2) {
+        grid-area: profit_loss;
+      }
+
+      & > div:nth-child(3) {
+        grid-area: open_positions;
+      }
+
+      & > div:nth-child(4) {
+        grid-area: strategies;
+      }
+
+      & > div:nth-child(5) {
+        grid-area: queued;
+      }
+
+      & > div:nth-child(6) {
+        grid-area: forbidden;
+      }
+
+      & > div:nth-child(7) {
+        grid-area: best_performers;
+      }
+
+      & > div:nth-child(8) {
+        grid-area: worst_performers;
+      }
+    }
 
     .main-element-header {
       display: flex;
@@ -86,38 +133,6 @@ export default {
       color: white;
       padding: 1em;
       background-color: rgba(0, 33, 43, 0.35);
-    }
-
-    & > div:nth-child(1) {
-      grid-area: account_balance;
-    }
-
-    & > div:nth-child(2) {
-      grid-area: profit_loss;
-    }
-
-    & > div:nth-child(3) {
-      grid-area: open_positions;
-    }
-
-    & > div:nth-child(4) {
-      grid-area: strategies;
-    }
-
-    & > div:nth-child(5) {
-      grid-area: queued;
-    }
-
-    & > div:nth-child(6) {
-      grid-area: forbidden;
-    }
-
-    & > div:nth-child(7) {
-      grid-area: best_performers;
-    }
-
-    & > div:nth-child(8) {
-      grid-area: worst_performers;
     }
   }
 }

@@ -5,7 +5,7 @@
       <h6>Total: <span id="total-strategies">4</span></h6>
     </div>
 
-    <div class="table-container">
+    <div class="table-container border">
       <table>
         <thead>
           <th>Name</th>
@@ -37,15 +37,6 @@
             <td>2.78</td>
             <td>1</td>
             <td>Active</td>
-          </tr><tr>
-            <td>10mQQQsdtht</td>
-            <td>2.33%</td>
-            <td>$1,435</td>
-            <td>68%</td>
-            <td>$10.22</td>
-            <td>2.78</td>
-            <td>1</td>
-            <td>Active</td>
           </tr>
           <tr>
             <td>10mQQQsdtht</td>
@@ -97,7 +88,16 @@
             <td>1</td>
             <td>Active</td>
           </tr>
-          
+          <tr>
+            <td>10mQQQsdtht</td>
+            <td>2.33%</td>
+            <td>$1,435</td>
+            <td>68%</td>
+            <td>$10.22</td>
+            <td>2.78</td>
+            <td>1</td>
+            <td>Active</td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -113,8 +113,5 @@ export default {
 <style lang="scss">
 .table-container {
   overflow: auto;
-  border: solid 1px $primary-dark;
-  margin-top: 1em;
-  height: 90%;
 }
 </style>

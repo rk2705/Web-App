@@ -5,7 +5,7 @@
       <h6>Total: <span id="total-open-positions">7</span></h6>
     </div>
 
-    <div id="inner-container">
+    <div id="inner-container" class="border">
       <div class="bar">
         <h6>Strategy1</h6>
         <ol>
@@ -161,9 +161,6 @@ export default {
 #open-positions {
   #inner-container {
     overflow: auto;
-    border: solid 1px $primary-dark;
-    margin-top: 1em;
-    height: 80%;
 
     display: flex;
     justify-content: space-between;
