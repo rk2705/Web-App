@@ -153,7 +153,7 @@
 
 <script>
 export default {
-  name: "Open Positions",
+  name: "Open_Positions",
 };
 </script>
 

@@ -1,15 +1,40 @@
 <template>
-  <div id="login-form">
-    <input type="text" placeholder="Username" />
-    <input type="password" placeholder="Password" />
+  <form id="login-form" @submit.prevent="loginUser">
+    <input type="text" v-model="username" placeholder="Username" />
+    <input type="password" v-model="password" placeholder="Password" />
     <input type="submit" value="Login" />
-    <p id="response">You Have Been Logged Out!</p>
-  </div>
+    <p id="response">{{ response }}</p>
+  </form>
 </template>
 
 <script>
 export default {
   name: "Login",
+  data() {
+    return {
+      username: "",
+      password: "",
+      response: "",
+    };
+  },
+  methods: {
+    loginUser() {
+      this.$store.dispatch("login", {
+        username: this.username,
+        password: this.password,
+      });
+    },
+  },
+  created() {
+    this.$store.watch(
+      (state) => state.auth.error,
+      (newValue) => {
+        console.log(newValue);
+        this.response = newValue;
+      }
+    );
+    this.response = this.$route.params.success;
+  },
 };
 </script>
 

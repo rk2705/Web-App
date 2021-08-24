@@ -87,6 +87,7 @@ export default {
 
   #add-forbidden-popup {
     padding: 1em;
+    display: none;
 
     & > div {
       display: grid;
@@ -111,11 +112,12 @@ export default {
         background-color: $primary-red;
         margin-left: 94%;
     }
+
   }
 
-  .table-container {
-    display: none;
-  }
+//   .table-container {
+//     display: none;
+//   }
 }
 
 .delete-forbidden-button {

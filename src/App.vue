@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <!-- <div id="nav"><router-link to="/">Home</router-link> |</div> -->
     <router-view />
   </div>
 </template>
@@ -44,5 +43,21 @@ body {
 
 .negative {
   color: $primary-red;
+}
+
+.chart-container {
+  position: relative;
+  height: 250px;
+
+}
+
+.chart {
+  height: 100%;
+  z-index: 10;
+
+  canvas {
+    width: 100% !important;
+    height: 100%;
+  }
 }
 </style>

@@ -2,14 +2,14 @@
   <div id="dashboard">
     <Tiles />
     <div class="container">
-      <div>account_balance</div>
-      <div>profit_loss</div>
+      <Account_Balance />
+      <Profit_Loss />
       <Open_Positions />
       <Strategies />
       <Queue />
       <Forbidden />
-      <div>best_performers</div>
-      <div>worst_performers</div>
+      <Best_Performers />
+      <Worst_Performers />
     </div>
   </div>
 </template>
@@ -20,10 +20,28 @@ import Open_Positions from "../components/Open_Positions.vue";
 import Strategies from "../components/Strategies.vue";
 import Queue from "../components/Queue.vue";
 import Forbidden from "../components/Forbidden.vue";
+import Best_Performers from "../components/Best_Performers.vue";
+import Worst_Performers from "../components/Worst_Performers.vue";
+import Account_Balance from "../components/Account_Balance.vue";
+import Profit_Loss from "../components/Profit_Loss.vue";
 
 export default {
   name: "Dashboard",
-  components: { Tiles, Open_Positions, Strategies, Queue, Forbidden },
+  components: {
+    Tiles,
+    Open_Positions,
+    Strategies,
+    Queue,
+    Forbidden,
+    Best_Performers,
+    Worst_Performers,
+    Account_Balance,
+    Profit_Loss,
+  },
+  created() {
+    // PULL TILE DATA
+    
+  }
 };
 </script>
 

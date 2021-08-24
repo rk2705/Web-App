@@ -8,13 +8,14 @@
     </div>
     <div class="tile">
       <h5>
-        Account ID: <span id="account_id" class="positive">123456789</span>
+        Account ID:
+        <span id="account_id" class="positive">{{ convertAccountID }}</span>
       </h5>
     </div>
     <div class="tile">
       <h5>
         Account Balance:
-        <span id="account_balance" class="positive">$20,145</span>
+        <span id="account_balance" class="positive">${{ account_balance }}</span>
       </h5>
     </div>
     <div class="tile">
@@ -38,6 +39,30 @@
 <script>
 export default {
   name: "Tiles",
+  data() {
+    return {
+      account_id: "",
+      account_balance: "",
+    };
+  },
+  computed: {
+    convertAccountID: function() {
+      let id = this.account_id;
+
+      let converted = "";
+
+      for (var i = 0; i < id.length; i++) {
+        if (i < id.length - 4) converted += "*";
+        else converted += id[i];
+      }
+
+      return converted;
+    },
+  },
+  created() {
+    this.account_id = this.$store.state.account.account_id;
+    this.account_balance= this.$store.state.account.balance;
+  },
 };
 </script>
 
