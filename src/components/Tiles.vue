@@ -4,7 +4,9 @@
       <h5 id="web-app-title" class="negative">Web App Title</h5>
     </div>
     <div class="tile">
-      <h5>User: <span id="user" class="positive">Trey Thomas</span></h5>
+      <h5>
+        User: <span id="user" class="positive">{{ username }}</span>
+      </h5>
     </div>
     <div class="tile">
       <h5>
@@ -15,7 +17,9 @@
     <div class="tile">
       <h5>
         Account Balance:
-        <span id="account_balance" class="positive">${{ account_balance }}</span>
+        <span id="account_balance" class="positive"
+          >${{ account_balance }}</span
+        >
       </h5>
     </div>
     <div class="tile">
@@ -31,7 +35,9 @@
       </h5>
     </div>
     <div class="tile">
-      <h5>Status: <span id="status" class="positive">Active</span></h5>
+      <h5>
+        Status: <span id="status" class="positive">{{ active }}</span>
+      </h5>
     </div>
   </div>
 </template>
@@ -43,6 +49,8 @@ export default {
     return {
       account_id: "",
       account_balance: "",
+      username: "",
+      active: "",
     };
   },
   computed: {
@@ -61,7 +69,9 @@ export default {
   },
   created() {
     this.account_id = this.$store.state.account.account_id;
-    this.account_balance= this.$store.state.account.balance;
+    this.account_balance = this.$store.state.account.balance;
+    this.username = this.$store.state.account.username;
+    this.active = this.$store.state.account.active;
   },
 };
 </script>

@@ -2,11 +2,11 @@ import axios from "axios";
 
 export default {
   state: {
-    username: "",
+    username: localStorage.getItem("username") || null,
     account_id: localStorage.getItem("account_id") || null,
-    accounts: [],
-    active: null,
-    balance: null,
+    accounts: localStorage.getItem("accounts") || [],
+    active: localStorage.getItem("active") || null,
+    balance: localStorage.getItem("balance") || null,
   },
   getters: {},
   mutations: {
@@ -27,6 +27,7 @@ export default {
       let accounts = user["Accounts"];
       // SET ACCOUNTS
       state.accounts = accounts;
+      localStorage.setItem("accounts", accounts);
 
       // SET ACCOUNT ID
       state.account_id = Object.keys(accounts)[0];
@@ -35,12 +36,24 @@ export default {
       // SET BALANCE
       state.balance =
         user["Accounts"][Object.keys(accounts)[0]]["Account_Balance"];
+      localStorage.setItem(
+        "balance",
+        user["Accounts"][Object.keys(accounts)[0]]["Account_Balance"]
+      );
 
       // SET ACTIVE STATUS
-      state.active = user["Active"];
+      let status = user["Active"];
+      if (status) {
+        state.active = "Active";
+        localStorage.setItem("active", "Active");
+      } else {
+        state.active = "Inactive";
+        localStorage.setItem("active", "Inactive");
+      }
 
       // SET USER NAME
       state.username = user["Name"];
+      localStorage.setItem("username", user["Name"]);
     },
   },
   actions: {
