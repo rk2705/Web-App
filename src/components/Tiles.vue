@@ -8,7 +8,7 @@
         User: <span id="user" class="positive">{{ username }}</span>
       </h5>
     </div>
-    <div class="tile">
+    <div class="tile" v-on:click="changeAccount">
       <h5>
         Account ID:
         <span id="account_id" class="positive">{{ convertAccountID }}</span>
@@ -17,7 +17,9 @@
     <div class="tile">
       <h5>
         Account Balance:
-        <span id="account_balance" class="positive"
+        <span
+          id="account_balance"
+          :class="account_balance >= 0 ? 'positive' : 'negative'"
           >${{ account_balance }}</span
         >
       </h5>
@@ -25,18 +27,29 @@
     <div class="tile">
       <h5>
         Rate of Return(30 days):
-        <span id="rate-of-return" class="positive">12.33%</span>
+        <span
+          id="rate-of-return"
+          :class="rate_of_return >= 0 ? 'positive' : 'negative'"
+          >{{ rate_of_return }}%</span
+        >
       </h5>
     </div>
     <div class="tile">
       <h5>
         Number of Holdings:
-        <span id="number-of-holdings" class="positive">24</span>
+        <span id="number-of-holdings" class="positive">{{
+          number_of_holdings
+        }}</span>
       </h5>
     </div>
-    <div class="tile">
+    <div class="tile" v-on:click="changeAccountStatus">
       <h5>
-        Status: <span id="status" class="positive">{{ active }}</span>
+        Status:
+        <span
+          id="status"
+          :class="account_status === 'Active' ? 'positive' : 'negative'"
+          >{{ account_status }}</span
+        >
       </h5>
     </div>
   </div>
@@ -48,9 +61,11 @@ export default {
   data() {
     return {
       account_id: "",
-      account_balance: "",
+      account_balance: 0,
       username: "",
-      active: "",
+      account_status: "N/A",
+      rate_of_return: 0,
+      number_of_holdings: 0,
     };
   },
   computed: {
@@ -67,11 +82,121 @@ export default {
       return converted;
     },
   },
+  methods: {
+    changeAccountStatus() {
+      let new_status = "";
+
+      if (this.account_status == "Active") new_status = "INACTIVE";
+      else new_status = "ACTIVE";
+
+      let result = confirm(
+        `ALERT: Are You Sure You Want To Change Your Status To ${new_status} For Account ${this.convertAccountID}?`
+      );
+
+      if (result) {
+        this.$store.dispatch("changeAccountStatus");
+      }
+    },
+    changeAccount() {
+      let accounts = this.$store.state.account.accounts;
+
+      if (accounts.length > 1) {
+        let next_index = accounts.indexOf(this.account_id) + 1;
+
+        if (next_index > accounts.length - 1) next_index = 0;
+
+        this.$store.dispatch("updateAccountID", accounts[next_index]);
+
+        this.updateWithNewAccountData();
+      }
+    },
+    updateWithNewAccountData() {
+      // FETCH BALANCE, ROR, NOH, STATUS
+      this.$store.dispatch("fetchAccountStatus");
+
+      this.$store.dispatch("fetchAccountBalance");
+
+      this.$store.dispatch("fetchRateOfReturn");
+
+      this.$store.dispatch("fetchNumberOfHoldings");
+    },
+  },
   created() {
     this.account_id = this.$store.state.account.account_id;
-    this.account_balance = this.$store.state.account.balance;
     this.username = this.$store.state.account.username;
-    this.active = this.$store.state.account.active;
+
+    // FETCH BALANCE, ROR, NOH, STATUS
+    this.$store.dispatch("fetchAccountStatus");
+
+    this.account_status = this.$store.state.account.account_status;
+
+    this.$store.dispatch("fetchAccountBalance");
+
+    this.account_balance = this.$store.state.account.account_balance;
+
+    this.$store.dispatch("fetchRateOfReturn");
+
+    this.rate_of_return = this.$store.state.account.rate_of_return;
+
+    this.$store.dispatch("fetchNumberOfHoldings");
+
+    this.number_of_holdings = this.$store.state.account.number_of_holdings;
+
+    // setInterval(() => {
+    //   this.$store.dispatch("fetchAccountBalance");
+    // }, 5000);
+
+    // WATCHERS
+
+    // account_status
+    this.$store.watch(
+      (state) => {
+        return state.account.account_status;
+      },
+      (newValue) => {
+        this.account_status = newValue;
+      }
+    );
+
+    // account_balance
+    this.$store.watch(
+      (state) => {
+        return state.account.account_balance;
+      },
+      (newValue) => {
+        this.account_balance = newValue;
+      }
+    );
+
+    // account_id
+    this.$store.watch(
+      (state) => {
+        return state.account.account_id;
+      },
+      (newValue) => {
+        this.account_id = newValue;
+      }
+    );
+
+    // rate_of_return
+    this.$store.watch(
+      (state) => {
+        return state.account.rate_of_return;
+      },
+      (newValue) => {
+        this.rate_of_return = newValue;
+      }
+    );
+
+    // number_of_holdings
+    this.$store.watch(
+      (state) => {
+        return state.account.number_of_holdings;
+      },
+      (newValue) => {
+        this.number_of_holdings = newValue;
+      }
+    );
   },
 };
 </script>
