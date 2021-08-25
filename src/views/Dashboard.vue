@@ -52,6 +52,8 @@ export default {
     this.$store.dispatch("fetchWorstPerformingEquities");
 
     this.$store.dispatch("fetchOpenPositions");
+
+    this.$store.dispatch("fetchStrategies");
   },
 };
 </script>

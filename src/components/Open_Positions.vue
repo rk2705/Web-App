@@ -2,7 +2,10 @@
   <div id="open-positions">
     <div class="main-element-header">
       <h5 class="main-h5">Open Positions</h5>
-      <h6>Total: <span id="total-open-positions">7</span></h6>
+      <h6>
+        Total:
+        <span id="total-open-positions">{{ number_of_positions }}</span>
+      </h6>
     </div>
 
     <div id="inner-container" class="border">
@@ -25,6 +28,17 @@ export default {
     return {
       open_positions: [],
     };
+  },
+  computed: {
+    number_of_positions() {
+      let i = 0;
+
+      this.open_positions.forEach((row) => {
+        i += row["Symbols"].length;
+      });
+
+      return i;
+    },
   },
   created() {
     // WATCHERS

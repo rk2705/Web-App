@@ -2,12 +2,18 @@
   <div id="forbidden">
     <div class="main-element-header">
       <h5 class="main-h5">
-        Forbidden
-        <button id="add-forbidden-button" title="Add Forbidden Symbol">
+        Forbidden Symbols
+        <button
+          id="add-forbidden-button"
+          title="Add Forbidden Symbol"
+          v-on:click="openPopup"
+        >
           +
         </button>
       </h5>
-      <h6>Total: <span id="total-forbidden">3</span></h6>
+      <h6>
+        Total: <span id="total-forbidden">{{ forbidden_symbols.length }}</span>
+      </h6>
     </div>
 
     <div class="table-container border">
@@ -17,62 +23,96 @@
           <th></th>
         </thead>
         <tbody>
-          <tr>
-            <td>ABC</td>
-            <td><button class="delete-forbidden-button">Delete</button></td>
-          </tr>
-          <tr>
-            <td>ABC</td>
-            <td><button class="delete-forbidden-button">Delete</button></td>
-          </tr>
-          <tr>
-            <td>ABC</td>
-            <td><button class="delete-forbidden-button">Delete</button></td>
-          </tr>
-          <tr>
-            <td>ABC</td>
-            <td><button class="delete-forbidden-button">Delete</button></td>
-          </tr>
-          <tr>
-            <td>ABC</td>
-            <td><button class="delete-forbidden-button">Delete</button></td>
-          </tr>
-          <tr>
-            <td>ABC</td>
-            <td><button class="delete-forbidden-button">Delete</button></td>
-          </tr>
-          <tr>
-            <td>ABC</td>
-            <td><button class="delete-forbidden-button">Delete</button></td>
+          <tr v-for="(symbol, index) in forbidden_symbols" :key="index">
+            <td>{{ symbol }}</td>
+            <td>
+              <button
+                class="delete-forbidden-button"
+                v-on:click="deleteForbiddenSymbol"
+              >
+                Delete
+              </button>
+            </td>
           </tr>
         </tbody>
       </table>
     </div>
 
-    <div id="add-forbidden-popup">
-      <button id="exit-forbidden-popup" title="Exit">X</button>
-      <div>
-        <input
-          type="text"
-          id="forbidden-symbol-name"
-          placeholder="Enter Symbol"
-        />
-        <input type="submit" value="Save" id="save-forbidden-symbol" />
+    <Popup v-if="popup" @closePopup="closePopup">
+      <div id="add-forbidden-symbol">
+        <h6>Add Forbidden Symbol</h6>
+        <div>
+          <input type="text" v-model="forbidden_symbol" />
+          <input type="submit" value="Save" v-on:click="saveData" />
+        </div>
       </div>
-    </div>
+    </Popup>
   </div>
 </template>
 
 <script>
+import Popup from "../components/Popup.vue";
+
 export default {
   name: "Forbidden",
+  components: { Popup },
+  data() {
+    return {
+      forbidden_symbols: [],
+      popup: false,
+      forbidden_symbol: "",
+    };
+  },
+  methods: {
+    closePopup() {
+      this.popup = false;
+    },
+    openPopup() {
+      this.popup = true;
+    },
+    saveData() {
+      let symbol = this.forbidden_symbol;
+
+      if (symbol != "") {
+        console.log(symbol);
+        this.forbidden_symbol = "";
+      } else {
+        alert("Symbol Field Can Not Be Empty");
+      }
+    },
+    deleteForbiddenSymbol(event) {
+      let parent = event.target.parentElement.parentElement;
+
+      let symbol = parent.querySelector("td:nth-child(1)").textContent;
+
+      let result = confirm(
+        `ALERT: Are You Sure You Want To Remove ${symbol} from forbidden symbols list?`
+      );
+
+      if (result) {
+        // this.$store.dispatch("removeSymbolFromForbidden");
+        console.log(symbol);
+      }
+    },
+  },
+  created() {
+    // WATCHERS
+
+    // open_positions
+    this.$store.watch(
+      (state) => {
+        return state.dashboard.forbidden_symbols;
+      },
+      (newValue) => {
+        this.forbidden_symbols = newValue;
+      }
+    );
+  },
 };
 </script>
 
 <style lang="scss">
 #forbidden {
-  position: relative;
-
   button,
   input[type="submit"] {
     transition: 0.2s ease;
@@ -85,39 +125,28 @@ export default {
     }
   }
 
-  #add-forbidden-popup {
-    padding: 1em;
-    display: none;
-
-    & > div {
-      display: grid;
-      gap: 1em;
+  .table-container {
+    td {
+      padding: 0 !important;
     }
+  }
+}
 
-    input {
-      height: 30px;
-    }
-
-    input[type="text"] {
-      padding: 0.25em 0.5em;
-      margin-top: 0.5em;
-    }
-
-    input[type="submit"] {
-      color: black !important;
-    }
-
-    #exit-forbidden-popup {
-        padding: 0.25em 0.5em;
-        background-color: $primary-red;
-        margin-left: 94%;
-    }
-
+#add-forbidden-symbol {
+  & > div {
+    display: grid;
+    gap: 1em;
   }
 
-//   .table-container {
-//     display: none;
-//   }
+  h6 {
+    font-size: 1rem;
+  }
+
+  input {
+    color: black !important;
+    font-size: 1rem;
+    padding: 0.25em;
+  }
 }
 
 .delete-forbidden-button {

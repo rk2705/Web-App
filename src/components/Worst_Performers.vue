@@ -13,7 +13,7 @@
         <tbody>
           <tr v-for="(best, index) in worst_performing_equities" :key="index">
             <td>{{ best["Symbol"] }}</td>
-            <td>{{ best["ROV"] }}</td>
+            <td>{{ best["ROV"] }}%</td>
           </tr>
         </tbody>
       </table>
