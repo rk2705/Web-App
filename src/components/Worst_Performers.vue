@@ -11,17 +11,9 @@
           <th>ROV To Date</th>
         </thead>
         <tbody>
-          <tr>
-            <td>ABC</td>
-            <td>-23.33%</td>
-          </tr>
-          <tr>
-            <td>ABC</td>
-            <td>-23.33%</td>
-          </tr>
-          <tr>
-            <td>ABC</td>
-            <td>-23.33%</td>
+          <tr v-for="(best, index) in worst_performing_equities" :key="index">
+            <td>{{ best["Symbol"] }}</td>
+            <td>{{ best["ROV"] }}</td>
           </tr>
         </tbody>
       </table>
@@ -32,6 +24,24 @@
 <script>
 export default {
   name: "Worst_Performers",
+  data() {
+    return {
+      worst_performing_equities: [],
+    };
+  },
+  created() {
+    // WATCHERS
+
+    // worst_performing_equities
+    this.$store.watch(
+      (state) => {
+        return state.dashboard.worst_performing_equities;
+      },
+      (newValue) => {
+        this.worst_performing_equities = newValue;
+      }
+    );
+  },
 };
 </script>
 

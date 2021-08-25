@@ -2,26 +2,14 @@
   <div id="queued">
     <div class="main-element-header">
       <h5 class="main-h5">Queued</h5>
-      <h6>Total: <span id="total-queued">2</span></h6>
+      <h6>
+        Total: <span id="total-queued">{{ queued.length }}</span>
+      </h6>
     </div>
 
     <div class="border">
       <ol id="queued-list">
-        <li>abc</li>
-        <li>abc</li>
-        <li>abc</li>
-        <li>abc</li>
-        <li>abc</li>
-        <li>abc</li>
-        <li>abc</li>
-        <li>abc</li>
-        <li>abc</li>
-        <li>abc</li>
-        <li>abc</li>
-        <li>abc</li>
-        <li>abc</li>
-        <li>abc</li>
-        <li>abc</li>
+        <li v-for="(queue, index) in queued" :key="index"></li>
       </ol>
     </div>
   </div>
@@ -30,6 +18,24 @@
 <script>
 export default {
   name: "Queued",
+  data() {
+    return {
+      queued: [],
+    };
+  },
+  created() {
+    // WATCHERS
+
+    // queued
+    this.$store.watch(
+      (state) => {
+        return state.dashboard.queued;
+      },
+      (newValue) => {
+        this.queued = newValue;
+      }
+    );
+  },
 };
 </script>
 

@@ -6,145 +6,12 @@
     </div>
 
     <div id="inner-container" class="border">
-      <div class="bar">
-        <h6>Strategy1</h6>
+      <div class="bar" v-for="(position, index) in open_positions" :key="index">
+        <h6>{{ position["Strategy"] }}</h6>
         <ol>
-          <li>abc</li>
-          <li>abc</li>
-          <li>abc</li>
-          <li>abc</li>
-        </ol>
-      </div>
-      <div class="bar">
-        <h6>Strategy1</h6>
-        <ol>
-          <li>abc</li>
-          <li>abc</li>
-          <li>abc</li>
-          <li>abc</li>
-          <li>abc</li>
-          <li>abc</li>
-        </ol>
-      </div>
-      <div class="bar">
-        <h6>10mOOO30mwowow</h6>
-        <ol>
-          <li>abc</li>
-          <li>abc</li>
-          <li>abc</li>
-          <li>abc</li>
-          <li>abc</li>
-          <li>abc</li>
-        </ol>
-      </div>
-      <div class="bar">
-        <h6>Strategy1</h6>
-        <ol>
-          <li>abc</li>
-          <li>abc</li>
-          <li>abc</li>
-          <li>abc</li>
-          <li>abc</li>
-          <li>abc</li>
-        </ol>
-      </div>
-      <div class="bar">
-        <h6>Strategy1</h6>
-        <ol>
-          <li>abc</li>
-          <li>abc</li>
-          <li>abc</li>
-          <li>abc</li>
-          <li>abc</li>
-          <li>abc</li>
-        </ol>
-      </div>
-      <div class="bar">
-        <h6>Strategy1</h6>
-        <ol>
-          <li>abc</li>
-          <li>abc</li>
-          <li>abc</li>
-          <li>abc</li>
-          <li>abc</li>
-          <li>abc</li>
-        </ol>
-      </div>
-      <div class="bar">
-        <h6>Strategy1</h6>
-        <ol>
-          <li>abc</li>
-          <li>abc</li>
-          <li>abc</li>
-          <li>abc</li>
-          <li>abc</li>
-          <li>abc</li>
-        </ol>
-      </div>
-      <div class="bar">
-        <h6>Strategy1</h6>
-        <ol>
-          <li>abc</li>
-          <li>abc</li>
-          <li>abc</li>
-          <li>abc</li>
-          <li>abc</li>
-          <li>abc</li>
-        </ol>
-      </div>
-      <div class="bar">
-        <h6>Strategy1</h6>
-        <ol>
-          <li>abc</li>
-          <li>abc</li>
-          <li>abc</li>
-          <li>abc</li>
-          <li>abc</li>
-          <li>abc</li>
-        </ol>
-      </div>
-      <div class="bar">
-        <h6>Strategy1</h6>
-        <ol>
-          <li>abc</li>
-          <li>abc</li>
-          <li>abc</li>
-          <li>abc</li>
-          <li>abc</li>
-          <li>abc</li>
-        </ol>
-      </div>
-      <div class="bar">
-        <h6>Strategy1</h6>
-        <ol>
-          <li>abc</li>
-          <li>abc</li>
-          <li>abc</li>
-          <li>abc</li>
-          <li>abc</li>
-          <li>abc</li>
-        </ol>
-      </div>
-      <div class="bar">
-        <h6>Strategy1</h6>
-        <ol>
-          <li>abc</li>
-          <li>abc</li>
-          <li>abc</li>
-          <li>abc</li>
-          <li>abc</li>
-          <li>abc</li>
-        </ol>
-      </div>
-      <div class="bar">
-        <h6>Strategy1</h6>
-        <ol>
-          <li>abc</li>
-          <li>abc</li>
-          <li>abc</li>
-          <li>abc</li>
-          <li>abc</li>
-          <li>abc</li>
+          <li v-for="(symbol, index) in position['Symbols']" :key="index">
+            {{ symbol }}
+          </li>
         </ol>
       </div>
     </div>
@@ -154,6 +21,24 @@
 <script>
 export default {
   name: "Open_Positions",
+  data() {
+    return {
+      open_positions: [],
+    };
+  },
+  created() {
+    // WATCHERS
+
+    // open_positions
+    this.$store.watch(
+      (state) => {
+        return state.dashboard.open_positions;
+      },
+      (newValue) => {
+        this.open_positions = newValue;
+      }
+    );
+  },
 };
 </script>
 
@@ -163,11 +48,15 @@ export default {
     overflow: auto;
 
     display: flex;
-    justify-content: space-between;
+    // justify-content: space-between;
 
     padding: 0 0.5em;
 
     .bar {
+      &:not(:nth-child(1)) {
+        margin-left: 1em;
+      }
+
       h6 {
         font-size: 0.9rem;
         border-bottom: solid 1px $primary-green;
@@ -178,7 +67,7 @@ export default {
         font-size: 0.8rem;
         line-height: 1.5;
         margin-top: 0.5em;
-        padding-left: 3em;
+        padding-left: 2em;
         padding-bottom: 0.5em;
       }
     }

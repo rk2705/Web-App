@@ -38,10 +38,21 @@ export default {
     Account_Balance,
     Profit_Loss,
   },
-  created() {
-    // PULL TILE DATA
-    
-  }
+  mounted() {
+    this.$store.dispatch("fetchAccountBalanceHistory");
+
+    this.$store.dispatch("fetchProfitLossHistory");
+
+    this.$store.dispatch("fetchQueued");
+
+    this.$store.dispatch("fetchForbiddenSymbols");
+
+    this.$store.dispatch("fetchBestPerformingEquities");
+
+    this.$store.dispatch("fetchWorstPerformingEquities");
+
+    this.$store.dispatch("fetchOpenPositions");
+  },
 };
 </script>
 
