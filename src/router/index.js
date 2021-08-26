@@ -43,6 +43,8 @@ const guard = function(to, from, next) {
 };
 
 router.beforeEach((to, from, next) => {
+  document.title = to["name"] || "Web App Name"; // CHANGE THIS TO APP NAME
+
   if (to.name !== "Login") {
     guard(to, from, next);
   } else next();

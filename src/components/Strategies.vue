@@ -126,24 +126,33 @@ export default {
       const copied_strategies = this.strategies.map((o) => ({ ...o }));
 
       if (strategy != "" && shares != "" && status != "") {
-        this.$store.dispatch("updateStrategy", this.edit_data);
+        this.$store
+          .dispatch("updateStrategy", this.edit_data)
+          .then((res) => {
+            if (res.status == 201) {
+              copied_strategies.map((row) => {
+                if (row["Strategy"] == strategy) {
+                  row["Shares"] = shares;
+                  row["Active"] = status;
+                }
 
-        copied_strategies.map((row) => {
-          if (row["Strategy"] == strategy) {
-            row["Shares"] = shares;
-            row["Active"] = status;
-          }
+                return row;
+              });
 
-          return row;
-        });
+              this.strategies = copied_strategies;
 
-        this.strategies = copied_strategies;
+              this.popup = false;
 
-        this.popup = false;
-
-        alert(`${strategy} Updated.`);
+              alert(`${strategy} Updated.`);
+            } else {
+              alert("Strategy Fields Can Not Be Empty");
+            }
+          })
+          .catch(() => {
+            alert("Error: Failed To Update Strategy");
+          });
       } else {
-        alert("Strategy Fields Can Not Be Empty");
+        alert("Error: Failed To Update Strategy");
       }
     },
   },

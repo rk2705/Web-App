@@ -74,20 +74,23 @@ export default {
 
     //  CHANGE ACCOUNT STATUS
     changeAccountStatus({ rootState, state, commit }) {
-      axios
-        .put(
-          `/api/change_account_status/${rootState.account.account_id}`,
-          { account_status: state.account_status },
-          {
-            headers: { "x-access-token": rootState.auth.token },
-          }
-        )
-        .then((res) => {
-          commit("SET_ACCOUNT_STATUS", res.data["account_status"]);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      return new Promise((resolve, reject) => {
+        axios
+          .put(
+            `/api/change_account_status/${rootState.account.account_id}`,
+            { account_status: state.account_status },
+            {
+              headers: { "x-access-token": rootState.auth.token },
+            }
+          )
+          .then((res) => {
+            commit("SET_ACCOUNT_STATUS", res.data["account_status"]);
+            resolve(res);
+          })
+          .catch((err) => {
+            reject(err);
+          });
+      });
     },
     //  FETCH ACCOUNT STATUS
     fetchAccountStatus({ commit, rootState }) {

@@ -74,15 +74,26 @@ export default {
       let symbol = this.forbidden_symbol;
 
       if (symbol != "") {
-        this.$store.dispatch("addForbiddenSymbol", symbol);
+        this.$store
+          .dispatch("addForbiddenSymbol", symbol)
+          .then((res) => {
+            if (res.status == 201) {
+              this.forbidden_symbol = "";
 
-        this.forbidden_symbol = "";
+              const copied_symbols = [...this.forbidden_symbols]
+              
+              copied_symbols.push(symbol.toUpperCase());
 
-        this.forbidden_symbols.push(symbol.toUpperCase());
+              this.forbidden_symbols = copied_symbols;
 
-        this.popup = false;
+              this.popup = false;
 
-        alert(`${symbol} Added To Forbidden Symbols List.`);
+              alert(`${symbol.toUpperCase()} Added To Forbidden Symbols List.`);
+            } else {
+              alert("Error: Failed To Add Symbol");
+            }
+          })
+          .catch(() => alert("Error: Failed To Add Symbol"));
       } else {
         alert("Symbol Field Can Not Be Empty");
       }
@@ -97,13 +108,22 @@ export default {
       );
 
       if (result) {
-        this.$store.dispatch("removeForbiddenSymbol", symbol);
+        this.$store
+          .dispatch("removeForbiddenSymbol", symbol)
+          .then((res) => {
+            if (res.status == 201) {
+              this.forbidden_symbols = this.forbidden_symbols.filter(
+                (item) => item !== symbol
+              );
 
-        this.forbidden_symbols = this.forbidden_symbols.filter(
-          (item) => item !== symbol
-        );
-
-        alert(`${symbol} Removed From Forbidden Symbols List.`);
+              alert(`${symbol} Removed From Forbidden Symbols List.`);
+            } else {
+              alert("Error: Failed To Remove Symbol");
+            }
+          })
+          .catch(() => {
+            alert("Error: Failed To Remove Symbol");
+          });
       }
     },
   },

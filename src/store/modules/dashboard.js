@@ -145,45 +145,57 @@ export default {
         });
     },
     addForbiddenSymbol({ rootState }, symbol) {
-      axios
-        .put(
-          `/api/add_forbidden_symbol/${rootState.account.account_id}`,
-          { symbol },
-          {
-            headers: { "x-access-token": rootState.auth.token },
-          }
-        )
-        .then(() => {})
-        .catch((err) => {
-          console.log(err);
-        });
+      return new Promise((resolve, reject) => {
+        axios
+          .put(
+            `/api/add_forbidden_symbol/${rootState.account.account_id}`,
+            { symbol },
+            {
+              headers: { "x-access-token": rootState.auth.token },
+            }
+          )
+          .then((res) => {
+            resolve(res);
+          })
+          .catch((err) => {
+            reject(err);
+          });
+      });
     },
     removeForbiddenSymbol({ rootState }, symbol) {
-      axios
-        .delete(
-          `/api/remove_forbidden_symbol/${rootState.account.account_id}/${symbol}`,
-          {
-            headers: { "x-access-token": rootState.auth.token },
-          }
-        )
-        .then(() => {})
-        .catch((err) => {
-          console.log(err);
-        });
+      return new Promise((resolve, reject) => {
+        axios
+          .delete(
+            `/api/remove_forbidden_symbol/${rootState.account.account_id}/${symbol}`,
+            {
+              headers: { "x-access-token": rootState.auth.token },
+            }
+          )
+          .then((res) => {
+            resolve(res);
+          })
+          .catch((err) => {
+            reject(err);
+          });
+      });
     },
     updateStrategy({ rootState }, data) {
-      axios
-        .put(
-          `/api/update_strategy/${rootState.account.account_id}`,
-          { data },
-          {
-            headers: { "x-access-token": rootState.auth.token },
-          }
-        )
-        .then(() => {})
-        .catch((err) => {
-          console.log(err);
-        });
+      return new Promise((resolve, reject) => {
+        axios
+          .put(
+            `/api/update_strategy/${rootState.account.account_id}`,
+            { data },
+            {
+              headers: { "x-access-token": rootState.auth.token },
+            }
+          )
+          .then((res) => {
+            resolve(res);
+          })
+          .catch((err) => {
+            reject(err);
+          });
+      });
     },
   },
 };

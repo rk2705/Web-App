@@ -54,6 +54,39 @@ export default {
     this.$store.dispatch("fetchOpenPositions");
 
     this.$store.dispatch("fetchStrategies");
+
+    // EVERY MINUTE
+    setInterval(() => {
+      this.$store.dispatch("fetchQueued");
+
+      this.$store.dispatch("fetchBestPerformingEquities");
+
+      this.$store.dispatch("fetchWorstPerformingEquities");
+
+      this.$store.dispatch("fetchOpenPositions");
+
+      this.$store.dispatch("fetchStrategies");
+    }, 60000);
+
+    // UPDATE CHARTS AT MIDNIGHT
+    function onMidnight() {
+      var now = new Date();
+      var night = new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        now.getDate() + 1, // the next day, ...
+        0,
+        0,
+        0 // ...at 00:00:00 hours
+      );
+      return night.getTime() - now.getTime();
+    }
+
+    setInterval(() => {
+      this.$store.dispatch("fetchAccountBalanceHistory");
+
+      this.$store.dispatch("fetchProfitLossHistory");
+    }, onMidnight());
   },
 };
 </script>

@@ -99,7 +99,18 @@ export default {
       );
 
       if (result) {
-        this.$store.dispatch("changeAccountStatus");
+        this.$store
+          .dispatch("changeAccountStatus")
+          .then((res) => {
+            if (res.status == 201) {
+              alert("Status Changed Successfully");
+            } else {
+              alert("Failed To Update Status");
+            }
+          })
+          .catch(() => {
+            alert("Failed To Update Status");
+          });
       }
     },
     changeAccount() {
@@ -124,6 +135,22 @@ export default {
       this.$store.dispatch("fetchRateOfReturn");
 
       this.$store.dispatch("fetchNumberOfHoldings");
+
+      this.$store.dispatch("fetchAccountBalanceHistory");
+
+      this.$store.dispatch("fetchProfitLossHistory");
+
+      this.$store.dispatch("fetchQueued");
+
+      this.$store.dispatch("fetchForbiddenSymbols");
+
+      this.$store.dispatch("fetchBestPerformingEquities");
+
+      this.$store.dispatch("fetchWorstPerformingEquities");
+
+      this.$store.dispatch("fetchOpenPositions");
+
+      this.$store.dispatch("fetchStrategies");
     },
   },
   created() {
@@ -147,9 +174,15 @@ export default {
 
     this.number_of_holdings = this.$store.state.account.number_of_holdings;
 
-    // setInterval(() => {
-    //   this.$store.dispatch("fetchAccountBalance");
-    // }, 5000);
+    // EVERY MINUTE
+    setInterval(() => {
+      this.$store.dispatch("fetchAccountBalance");
+    }, 5000);
+
+    setInterval(() => {
+      this.$store.dispatch("fetchRateOfReturn");
+      this.$store.dispatch("fetchNumberOfHoldings");
+    }, 60000);
 
     // WATCHERS
 
