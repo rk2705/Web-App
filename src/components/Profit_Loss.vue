@@ -5,7 +5,11 @@
     </div>
 
     <div id="profit-loss-chart" class="chart-container">
-      <LineChart class="chart" :chart-data="daily_profit_loss" chart_name="" />
+      <LineChart
+        class="chart"
+        :chart-data="profit_loss_history"
+        chart_name=""
+      />
     </div>
   </div>
 </template>
@@ -20,31 +24,18 @@ export default {
   },
   data() {
     return {
-      daily_profit_loss: {},
+      profit_loss_history: {},
     };
   },
   methods: {
-    createDummyData() {
-      let data = {
-        "08-10-21": 23.44,
-        "08-11-21": 55.22,
-        "08-12-21": 33.57,
-        "08-13-21": 10.24,
-        "08-14-21": 16.74,
-        "08-15-21": 67.45,
-        "08-16-21": 47.11,
-      };
-
-      return data;
-    },
     setLineCharts(data) {
       let labels = [];
       let balances = [];
 
-      for (let key of Object.keys(data)) {
-        labels.push(key);
-        balances.push(data[key]);
-      }
+      data.forEach((row) => {
+        labels.push(row["Date"]);
+        balances.push(row["Profit_Loss"]);
+      });
 
       let line_color = "#7fbf3f";
 
@@ -68,9 +59,19 @@ export default {
     },
   },
   created() {
-    let data = this.createDummyData();
+    let data = this.$store.state.dashboard.profit_loss_history;
 
-    this.daily_profit_loss = this.setLineCharts(data);
+    this.profit_loss_history = this.setLineCharts(data);
+
+    // account_balance_line_chart
+    this.$store.watch(
+      (state) => {
+        return state.dashboard.profit_loss_history;
+      },
+      (newValue) => {
+        this.profit_loss_history = this.setLineCharts(newValue);
+      }
+    );
   },
 };
 </script>

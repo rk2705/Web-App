@@ -1,7 +1,7 @@
 <template>
   <div id="popup">
     <div id="popup-container">
-      <button v-on:click="$emit('closePopup')">X</button>
+      <button v-on:click="$emit('closePopup')">Exit</button>
       <slot></slot>
     </div>
   </div>
@@ -29,7 +29,7 @@ export default {
     background: $primary-dark;
     border-radius: 5px;
     min-width: 350px;
-    min-height: 350px;
+    // min-height: 350px;
     margin: auto;
     border: ridge 1px $primary-green;
 
@@ -39,12 +39,14 @@ export default {
     }
 
     button {
-      padding: 0.5em;
+      padding: 0.25em 0.5em;
       font-size: 1rem;
-      background: transparent;
+      background: $primary-red;
       border: none;
-      color: $primary-red;
+      color: white;
       transition: 0.2s ease;
+      margin: 0.5em;
+      float: right;
 
       &:hover {
         opacity: 0.5;

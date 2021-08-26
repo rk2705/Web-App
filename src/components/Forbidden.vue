@@ -74,8 +74,15 @@ export default {
       let symbol = this.forbidden_symbol;
 
       if (symbol != "") {
-        console.log(symbol);
+        this.$store.dispatch("addForbiddenSymbol", symbol);
+
         this.forbidden_symbol = "";
+
+        this.forbidden_symbols.push(symbol.toUpperCase());
+
+        this.popup = false;
+
+        alert(`${symbol} Added To Forbidden Symbols List.`);
       } else {
         alert("Symbol Field Can Not Be Empty");
       }
@@ -90,8 +97,13 @@ export default {
       );
 
       if (result) {
-        // this.$store.dispatch("removeSymbolFromForbidden");
-        console.log(symbol);
+        this.$store.dispatch("removeForbiddenSymbol", symbol);
+
+        this.forbidden_symbols = this.forbidden_symbols.filter(
+          (item) => item !== symbol
+        );
+
+        alert(`${symbol} Removed From Forbidden Symbols List.`);
       }
     },
   },

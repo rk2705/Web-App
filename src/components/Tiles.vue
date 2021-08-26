@@ -52,6 +52,11 @@
         >
       </h5>
     </div>
+    <div class="tile" v-on:click="$store.dispatch('logout')">
+      <h5>
+        Logout
+      </h5>
+    </div>
   </div>
 </template>
 
@@ -216,7 +221,7 @@ export default {
   }
 
   @media (min-width: 1536px) {
-    grid-template-columns: repeat(7, 1fr);
+    grid-template-columns: repeat(8, 1fr);
     border-bottom: solid 1px $primary-green;
   }
 
@@ -237,7 +242,8 @@ export default {
     }
 
     &:nth-child(3),
-    &:nth-child(7) {
+    &:nth-child(7),
+    &:nth-child(8) {
       cursor: pointer;
 
       &:hover {

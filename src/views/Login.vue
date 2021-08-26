@@ -88,17 +88,6 @@ export default {
       outline: none;
       background: transparent;
     }
-
-    &:-webkit-autofill,
-    &:-webkit-autofill:hover,
-    &:-webkit-autofill:focus,
-    &:-webkit-autofill:active {
-      -webkit-box-shadow: 0 0 0 30px rgba(0, 0, 0, 0) inset !important;
-    }
-
-    &:-webkit-autofill {
-      -webkit-text-fill-color: white !important;
-    }
   }
 
   ::-webkit-input-placeholder {

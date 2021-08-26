@@ -7,7 +7,7 @@
     <div id="account-balance-chart" class="chart-container">
       <LineChart
         class="chart"
-        :chart-data="daily_account_balance"
+        :chart-data="account_balance_history"
         chart_name=""
       />
     </div>
@@ -24,31 +24,18 @@ export default {
   },
   data() {
     return {
-      daily_account_balance: {},
+      account_balance_history: {},
     };
   },
   methods: {
-    createDummyData() {
-      let data = {
-        "08-10-21": 1021.45,
-        "08-11-21": 1001.23,
-        "08-12-21": 1116.36,
-        "08-13-21": 1255.12,
-        "08-14-21": 923.77,
-        "08-15-21": 1001.1,
-        "08-16-21": 1088.22,
-      };
-
-      return data;
-    },
     setLineCharts(data) {
       let labels = [];
       let balances = [];
 
-      for (let key of Object.keys(data)) {
-        labels.push(key);
-        balances.push(data[key]);
-      }
+      data.forEach((row) => {
+        labels.push(row["Date"]);
+        balances.push(row["Balance"]);
+      });
 
       let line_color = "#7fbf3f";
 
@@ -72,9 +59,19 @@ export default {
     },
   },
   created() {
-    let data = this.createDummyData();
+    let data = this.$store.state.dashboard.account_balance_history;
 
-    this.daily_account_balance = this.setLineCharts(data);
+    this.account_balance_history = this.setLineCharts(data);
+
+    // account_balance_line_chart
+    this.$store.watch(
+      (state) => {
+        return state.dashboard.account_balance_history;
+      },
+      (newValue) => {
+        this.account_balance_history = this.setLineCharts(newValue);
+      }
+    );
   },
 };
 </script>

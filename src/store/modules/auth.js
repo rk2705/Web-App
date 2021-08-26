@@ -25,7 +25,6 @@ export default {
       axios
         .post(`/login`, data)
         .then((resp) => {
-
           commit("SET_TOKEN", resp.data["token"]);
 
           commit("SET_INITIAL_DATA", resp.data["data"], {

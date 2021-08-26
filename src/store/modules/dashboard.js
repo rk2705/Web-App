@@ -144,5 +144,46 @@ export default {
           console.log(err);
         });
     },
+    addForbiddenSymbol({ rootState }, symbol) {
+      axios
+        .put(
+          `/api/add_forbidden_symbol/${rootState.account.account_id}`,
+          { symbol },
+          {
+            headers: { "x-access-token": rootState.auth.token },
+          }
+        )
+        .then(() => {})
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    removeForbiddenSymbol({ rootState }, symbol) {
+      axios
+        .delete(
+          `/api/remove_forbidden_symbol/${rootState.account.account_id}/${symbol}`,
+          {
+            headers: { "x-access-token": rootState.auth.token },
+          }
+        )
+        .then(() => {})
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    updateStrategy({ rootState }, data) {
+      axios
+        .put(
+          `/api/update_strategy/${rootState.account.account_id}`,
+          { data },
+          {
+            headers: { "x-access-token": rootState.auth.token },
+          }
+        )
+        .then(() => {})
+        .catch((err) => {
+          console.log(err);
+        });
+    },
   },
 };

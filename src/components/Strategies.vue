@@ -117,13 +117,40 @@ export default {
       };
     },
     saveData() {
-      console.log(this.edit_data);
+      let strategy = this.edit_data["Strategy"];
+
+      let shares = this.edit_data["Shares"];
+
+      let status = this.edit_data["Status"];
+
+      const copied_strategies = this.strategies.map((o) => ({ ...o }));
+
+      if (strategy != "" && shares != "" && status != "") {
+        this.$store.dispatch("updateStrategy", this.edit_data);
+
+        copied_strategies.map((row) => {
+          if (row["Strategy"] == strategy) {
+            row["Shares"] = shares;
+            row["Active"] = status;
+          }
+
+          return row;
+        });
+
+        this.strategies = copied_strategies;
+
+        this.popup = false;
+
+        alert(`${strategy} Updated.`);
+      } else {
+        alert("Strategy Fields Can Not Be Empty");
+      }
     },
   },
   created() {
     // WATCHERS
 
-    // open_positions
+    // strategies
     this.$store.watch(
       (state) => {
         return state.dashboard.strategies;
@@ -153,6 +180,7 @@ export default {
 #edit-strategy {
   display: grid;
   gap: 1em;
+  width: 100%;
 
   input,
   select {
