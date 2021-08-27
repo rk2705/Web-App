@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import Popup from "./popup.vue"
+import Popup from "./Popup.vue"
 
 export default {
   name: "Forbidden",

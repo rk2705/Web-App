@@ -15,15 +15,15 @@
 </template>
 
 <script>
-import Tiles from "../components/tiles.vue";
-import Open_Positions from "../components/open_positions.vue";
-import Strategies from "../components/strategies.vue";
-import Queue from "../components/queue.vue";
-import Forbidden from "../components/forbidden.vue";
-import Best_Performers from "../components/best_performers.vue";
-import Worst_Performers from "../components/worst_performers.vue";
-import Account_Balance from "../components/account_balance.vue";
-import Profit_Loss from "../components/profit_loss.vue";
+import Tiles from "../components/Tiles.vue";
+import Open_Positions from "../components/Open_Positions.vue";
+import Strategies from "../components/Strategies.vue";
+import Queue from "../components/Queue.vue";
+import Forbidden from "../components/Forbidden.vue";
+import Best_Performers from "../components/Best_Performers.vue";
+import Worst_Performers from "../components/Worst_Performers.vue";
+import Account_Balance from "../components/Account_Balance.vue";
+import Profit_Loss from "../components/Profit_Loss.vue";
 
 export default {
   name: "Dashboard",
