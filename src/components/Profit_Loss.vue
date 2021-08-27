@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import LineChart from "../components/LineChart";
+import LineChart from "../components/linechart";
 
 export default {
   name: "Profit_Loss",

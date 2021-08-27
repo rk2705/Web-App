@@ -3,8 +3,8 @@ import VueRouter from "vue-router";
 import store from "../store";
 import axios from "axios";
 
-import Login from "../views/Login.vue";
-import Dashboard from "../views/Dashboard.vue";
+import Login from "../views/login.vue";
+import Dashboard from "../views/dashboard.vue";
 
 Vue.use(VueRouter);
 
