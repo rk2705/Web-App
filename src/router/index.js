@@ -19,6 +19,14 @@ const routes = [
     name: "Dashboard",
     component: Dashboard,
   },
+  {
+    path: "*",
+    redirect: { name: "Dashboard" },
+  },
+  {
+    path: "/",
+    redirect: { name: "Dashboard" },
+  },
 ];
 
 const router = new VueRouter({
