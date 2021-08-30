@@ -23,7 +23,11 @@ export default {
   actions: {
     login({ commit }, data) {
       axios
-        .post(`/login`, data)
+        .post(`/login`, data, {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+          },
+        })
         .then((resp) => {
           commit("SET_TOKEN", resp.data["token"]);
 
