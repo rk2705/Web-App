@@ -9,7 +9,9 @@
 
     <div class="border">
       <ol id="queued-list">
-        <li v-for="(queue, index) in queued" :key="index"></li>
+        <li v-for="(queue, index) in queued" :key="index">
+          {{ queue["Symbol"] }} - {{ queue["Order_Type"] }} ORDER
+        </li>
       </ol>
     </div>
   </div>

@@ -16,7 +16,7 @@
           <th>WRP</th>
           <th>MDD</th>
           <th>SR</th>
-          <th>Shares</th>
+          <th>Position Size</th>
           <th>Status</th>
         </thead>
         <tbody>
@@ -38,7 +38,7 @@
               {{ strategy["SR"] }}
             </td>
             <td class="cursor" v-on:click="openPopup">
-              {{ strategy["Shares"] }}
+              ${{ strategy["Position_Size"] }}
             </td>
             <td
               class="cursor"
@@ -56,11 +56,11 @@
       <div id="edit-strategy">
         <h6>{{ edit_data["Strategy"] }}</h6>
         <div>
-          <label for="">Shares</label>
+          <label for="">Position Size ($)</label>
           <input
             type="text"
-            placeholder="Shares"
-            v-model.number="edit_data['Shares']"
+            placeholder="Position Size"
+            v-model.number="edit_data['Position_Size']"
           />
         </div>
         <div>
@@ -101,9 +101,7 @@ export default {
         .querySelector("td:nth-child(1)")
         .textContent.toString();
 
-      let Shares = parseInt(
-        parent.querySelector("td:nth-child(7)").textContent
-      );
+      let Position_Size = parseInt(parent.querySelector("td:nth-child(7)").textContent.replace("$", "").trim())
 
       let Status = parent
         .querySelector("td:nth-child(8)")
@@ -112,27 +110,27 @@ export default {
 
       this.edit_data = {
         Strategy,
-        Shares,
+        Position_Size,
         Status,
       };
     },
     saveData() {
       let strategy = this.edit_data["Strategy"];
 
-      let shares = this.edit_data["Shares"];
+      let position_size = Math.round(this.edit_data["Position_Size"]);
 
       let status = this.edit_data["Status"];
-
+      
       const copied_strategies = this.strategies.map((o) => ({ ...o }));
 
-      if (strategy != "" && shares != "" && status != "") {
+      if (strategy != "" && position_size != "" && status != "") {
         this.$store
           .dispatch("updateStrategy", this.edit_data)
           .then((res) => {
             if (res.status == 201) {
               copied_strategies.map((row) => {
                 if (row["Strategy"] == strategy) {
-                  row["Shares"] = shares;
+                  row["Position_Size"] = position_size;
                   row["Active"] = status;
                 }
 
