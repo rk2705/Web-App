@@ -1,8 +1,20 @@
 <template>
   <div id="app">
-    <router-view />
+    <Sidebar v-if="$route.name !== 'Login'" />
+    <div id="app-container">
+      <router-view />
+      <Footer v-if="$route.name !== 'Login'" />
+    </div>
   </div>
 </template>
+
+<script>
+import Sidebar from "./components/Sidebar.vue";
+import Footer from "./components/Footer.vue";
+export default {
+  components: { Sidebar, Footer },
+};
+</script>
 
 <style lang="scss">
 @import url("https://use.typekit.net/ghr2zdi.css");
@@ -19,16 +31,20 @@ body {
 }
 
 #app {
-  background-image: url("assets/img/red_abstract_bg.jpg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
   width: 100%;
   height: 100vh;
+  background-color: $secondary-dark;
+  display: flex;
+}
+
+#app-container {
+  position: relative;
+  padding: 1em;
+  width: 100%;
 }
 
 ::-webkit-scrollbar {
-  background: rgba(255, 255, 255, 0.5);
+  background: $primary-light;
   width: 10px;
   height: 10px;
 }
@@ -43,21 +59,5 @@ body {
 
 .negative {
   color: $primary-red;
-}
-
-.chart-container {
-  position: relative;
-  height: 250px;
-
-}
-
-.chart {
-  height: 100%;
-  z-index: 10;
-
-  canvas {
-    width: 100% !important;
-    height: 100%;
-  }
 }
 </style>

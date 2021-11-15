@@ -37,7 +37,7 @@ const router = new VueRouter({
 const guard = function(to, from, next) {
   // check for valid auth token
   axios
-    .get(`/checkAuthToken`, {
+    .get(`/auth/checkAuthToken`, {
       headers: { "x-access-token": store.state.auth.token },
     })
     .then(() => {
