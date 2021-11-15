@@ -2,13 +2,12 @@
   <div id="sidebar">
     <div id="logo">My Webapp</div>
     <div id="nav-link-container">
-      <div
-        class="nav"
-        v-bind:class="[$route.name === 'Dashboard' ? 'selected_route' : '']"
-      >
+      <router-link class="nav" to="/dashboard">
         <span>DASHBOARD</span>
-      </div>
-      <div class="nav"><span>SETTINGS</span></div>
+      </router-link>
+      <router-link class="nav" to="/settings"
+        ><span>SETTINGS</span></router-link
+      >
       <div class="nav" v-on:click="logout"><span>LOGOUT</span></div>
     </div>
   </div>
@@ -41,6 +40,13 @@ export default {
   }
 
   #nav-link-container {
+    display: grid;
+
+    a {
+      color: $primary-text;
+      text-decoration: none;
+    }
+
     .nav {
       width: 250px;
       padding: 1em 0.65em;
@@ -50,7 +56,7 @@ export default {
       transition: 0.2s ease-in-out;
       cursor: pointer;
 
-      &:hover:not(.selected_route) {
+      &:hover:not(.router-link-active) {
         opacity: 0.85;
         padding-left: 1em;
         color: $primary-light;
@@ -61,7 +67,7 @@ export default {
       border-top: $fourth-light solid 1px;
     }
 
-    .selected_route {
+    .router-link-active {
       opacity: 0.85;
       padding-left: 2em;
       color: $primary-light;

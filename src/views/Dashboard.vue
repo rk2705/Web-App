@@ -1,10 +1,14 @@
 <template>
-  <div id="dashboard"></div>
+  <div id="dashboard">
+    <Table />
+  </div>
 </template>
 
 <script>
+import Table from "../components/Table.vue";
 export default {
   Name: "Dashboard",
+  components: { Table },
 };
 </script>
 

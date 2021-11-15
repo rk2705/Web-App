@@ -4,7 +4,14 @@ export default {
     account_ids: JSON.parse(localStorage.getItem("account_ids")) || [],
     current_account: localStorage.getItem("current_account") || null,
   },
-  getters: {},
+  getters: {
+    GET_USERNAME(state) {
+      return state.user_name;
+    },
+    GET_CURRENT_ACCOUNT(state) {
+      return state.current_account;
+    },
+  },
   mutations: {
     SET_USER(state, user) {
       state.user_name = user["Name"];

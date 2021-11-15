@@ -14,8 +14,8 @@ export default {
       localStorage.setItem("access_token", token);
     },
     REMOVE_TOKEN(state) {
-      state.token = null;
-      localStorage.setItem("token", null);
+      state.access_token = null;
+      localStorage.setItem("access_token", null);
     },
     SET_ERROR(state, error) {
       state.error = error;
