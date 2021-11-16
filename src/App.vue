@@ -50,7 +50,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: $primary-dark;
+  background: $third-dark;
 }
 
 .positive {
