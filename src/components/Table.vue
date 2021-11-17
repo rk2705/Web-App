@@ -7,7 +7,7 @@
     <div class="table">
       <table>
         <thead>
-          <th v-for="(title, index) in table_th" :key="index">
+          <th v-for="(title, index) in Headers" :key="index">
             {{ title.replace("_", " ") }}
           </th>
         </thead>
@@ -25,15 +25,18 @@
 export default {
   name: "Table",
   props: ["tableData", "tableName"],
-  data() {
-    return {
-      table_th: [],
-    };
-  },
-  created() {
-    Object.keys(this.tableData[0]).find((key) => {
-      this.table_th.push(key);
-    });
+  computed: {
+    Headers() {
+      let table_th = [];
+      try {
+        Object.keys(this.tableData[0]).find((key) => {
+          table_th.push(key);
+        });
+        return table_th;
+      } catch {
+        return table_th;
+      }
+    },
   },
 };
 </script>
@@ -52,6 +55,8 @@ export default {
 
     h5 {
       font-size: 1rem;
+      letter-spacing: 1.5px;
+      font-style: italic;
     }
 
     span {

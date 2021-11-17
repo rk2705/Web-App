@@ -4,7 +4,7 @@ import NProgress from "nprogress";
 
 export default {
   state: {
-    token: localStorage.getItem("access_token") || null,
+    access_token: localStorage.getItem("access_token") || null,
     error: "",
   },
   getters: {},

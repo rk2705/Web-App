@@ -44,13 +44,13 @@ body {
 }
 
 ::-webkit-scrollbar {
-  background: $primary-light;
+  background: $third-dark;
   width: 10px;
   height: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: $third-dark;
+  background: $primary-light;
 }
 
 .positive {

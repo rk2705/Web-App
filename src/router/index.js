@@ -46,7 +46,7 @@ const guard = function(to, from, next) {
   NProgress.start();
   axios
     .get(`/auth/checkAuthToken`, {
-      headers: { "x-access-token": store.state.auth.token },
+      headers: { "x-access-token": store.state.auth.access_token },
     })
     .then(() => {
       // Token is valid, so continue
