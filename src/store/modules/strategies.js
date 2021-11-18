@@ -21,7 +21,6 @@ export default {
         })
         .then((resp) => {
           commit("SET_STRATEGY", resp.data["strategies"]);
-          console.log(resp.data["strategies"]);
         })
         .catch((err) => {
           let error = err.response.data.error;

@@ -11,7 +11,16 @@
       >
     </div>
     <div>
-      <label class="clickable">STATUS: <span>Active</span></label>
+      <label class="clickable"
+        >STATUS:
+        <span
+          id="current_account_status"
+          v-bind:class="[
+            current_account_status === true ? 'positive' : 'negative',
+          ]"
+          >{{ current_account_status === true ? "Active" : "Inactive" }}</span
+        ></label
+      >
     </div>
   </div>
 </template>
@@ -23,11 +32,13 @@ export default {
     return {
       user_name: null,
       current_account: null,
+      current_account_status: null,
     };
   },
   created() {
     this.user_name = this.$store.getters.GET_USERNAME;
     this.current_account = this.$store.getters.GET_CURRENT_ACCOUNT;
+    this.current_account_status = this.$store.getters.GET_CURRENT_ACCOUNT_STATUS;
   },
   computed: {
     convertAccountID: function() {
@@ -75,7 +86,7 @@ export default {
     letter-spacing: 1.5px;
     font-size: 0.75rem;
 
-    span {
+    span:not(#current_account_status) {
       color: $primary-green;
     }
   }

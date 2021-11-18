@@ -1,6 +1,7 @@
 <template>
   <div id="dashboard">
     <Table :tableData="strategies" :tableName="'Strategies'" />
+    <Table :tableData="positions" :tableName="'Open Positions'" />
   </div>
 </template>
 
@@ -12,6 +13,7 @@ export default {
   data() {
     return {
       strategies: [],
+      positions: [],
     };
   },
   methods: {
@@ -27,7 +29,34 @@ export default {
 
       this.strategies = strategies;
     },
+
+    filterPositions(positions) {
+      positions.forEach((position) => {
+        delete position._id;
+        delete position.Position_Size;
+        delete position.Trader;
+        delete position.Position_Type;
+        delete position.Data_Integrity;
+        delete position.Account_ID;
+
+        position.Entry_Date = this.formatDate(position.Entry_Date);
+      });
+
+      this.positions = positions;
+    },
+    formatDate(date) {
+      var d = new Date(date),
+        month = "" + (d.getMonth() + 1),
+        day = "" + d.getDate(),
+        year = d.getFullYear();
+
+      if (month.length < 2) month = "0" + month;
+      if (day.length < 2) day = "0" + day;
+
+      return [year, month, day].join("-");
+    },
   },
+
   created() {
     this.$store.watch(
       (state) => state.strategies.strategies,
@@ -36,21 +65,18 @@ export default {
       }
     );
 
+    this.$store.watch(
+      (state) => state.positions.positions,
+      (newValue) => {
+        this.filterPositions(newValue);
+      }
+    );
+
     this.$store.dispatch("fetchStrategies");
+
+    this.$store.dispatch("fetchPositions");
   },
 };
-// [{'Account_ID': 232327602,
-//   'Active': True,
-//   'Asset_Type': 'EQUITY',
-//   'Avg_ROI': 0,
-//   'MDD': 0.0,
-//   'Order_Type': 'STANDARD',
-//   'Position_Size': 500,
-//   'Position_Type': 'LONG',
-//   'Profit_Loss': 0.0,
-//   'SR': 0,
-//   'Strategy': 'TESTSTRATEGY',
-//   'WRP': 0}]
 </script>
 
 <style lang="scss">

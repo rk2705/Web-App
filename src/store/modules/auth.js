@@ -10,7 +10,7 @@ export default {
   getters: {},
   mutations: {
     SET_TOKEN(state, token) {
-      state.token = token;
+      state.access_token = token;
       localStorage.setItem("access_token", token);
     },
     REMOVE_TOKEN(state) {
@@ -22,7 +22,7 @@ export default {
     },
   },
   actions: {
-    login({ commit }, data) {
+    login({ commit, dispatch }, data) {
       NProgress.start();
       axios
         .post(`/auth/login`, data, {
@@ -36,6 +36,8 @@ export default {
           commit("SET_USER", resp.data["user"], {
             root: true,
           });
+
+          dispatch("fetchCurrentAccountStatus");
 
           setTimeout(() => {
             if (

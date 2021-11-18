@@ -18,6 +18,9 @@
         </tbody>
       </table>
     </div>
+    <div class="empty-message" v-if="tableData.length === 0">
+      <p>There Are No {{ tableName }}</p>
+    </div>
   </div>
 </template>
 
@@ -47,6 +50,7 @@ export default {
   background-color: $primary-dark;
   padding: 1em;
   border: solid 1px $primary-light;
+  position: relative;
 
   .table-header-div {
     display: flex;
@@ -57,6 +61,7 @@ export default {
       font-size: 1rem;
       letter-spacing: 1.5px;
       font-style: italic;
+      border-bottom: solid 1px $primary-light;
     }
 
     span {
@@ -64,9 +69,26 @@ export default {
     }
   }
 
+  .empty-message {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    p {
+      margin: auto;
+      letter-spacing: 1.5px;
+      border-bottom: 1px solid $primary-light;
+    }
+  }
+
   .table {
     overflow-y: auto;
-    min-height: 106px;
+    min-height: 300px;
     max-height: 300px;
 
     & thead th {
