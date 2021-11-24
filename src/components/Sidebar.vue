@@ -5,9 +5,9 @@
       <router-link class="nav" to="/dashboard">
         <span>DASHBOARD</span>
       </router-link>
-      <router-link class="nav" to="/settings"
+      <!-- <router-link class="nav" to="/settings"
         ><span>SETTINGS</span></router-link
-      >
+      > -->
       <div class="nav" v-on:click="logout"><span>LOGOUT</span></div>
     </div>
   </div>

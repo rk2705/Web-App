@@ -6,12 +6,12 @@
       >
     </div>
     <div>
-      <label class="clickable"
+      <label class="clickable" v-on:click="changeAccount"
         >ACCOUNT ID: <span>{{ convertAccountID }}</span></label
       >
     </div>
     <div>
-      <label class="clickable"
+      <label class="clickable" v-on:click="changeStatus"
         >STATUS:
         <span
           id="current_account_status"
@@ -53,13 +53,36 @@ export default {
   },
   methods: {
     changeAccount() {
-      let accounts = this.$store.state.user.accounts_ids;
+      let accounts = this.$store.state.user.account_ids;
+
       if (accounts.length > 1) {
         let next_index = accounts.indexOf(this.current_account) + 1;
         if (next_index > accounts.length - 1) next_index = 0;
-        // this.$store.dispatch("updateAccountID", accounts[next_index]);
-        // this.updateWithNewAccountData();
-      }
+
+        this.$store.commit("SET_CURRENT_ACCOUNT", accounts[next_index]);
+
+        this.current_account = accounts[next_index];
+
+        this.$store.dispatch("fetchStrategies");
+
+        this.$store.dispatch("fetchPositions");
+
+        this.$store.dispatch("fetchQueue");
+
+        this.$store.dispatch("fetchForbidden");
+      } else return;
+    },
+    changeStatus() {
+      if (
+        confirm(
+          `Are you sure you want to change account status to ${
+            this.current_account_status === true ? "INACTIVE" : "ACTIVE"
+          }?`
+        )
+      )
+        this.$store.dispatch("changeCurrentAccountStatus");
+
+      this.current_account_status = !this.current_account_status;
     },
   },
 };

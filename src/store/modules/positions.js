@@ -4,7 +4,11 @@ export default {
   state: {
     positions: [],
   },
-  getters: {},
+  getters: {
+    GET_POSITIONS(state) {
+      return state.positions;
+    },
+  },
   mutations: {
     SET_POSITIONS(state, positions) {
       state.positions = positions;

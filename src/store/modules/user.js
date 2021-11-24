@@ -33,6 +33,9 @@ export default {
       state.current_account_status = status;
       localStorage.setItem("current_account_status", status);
     },
+    SET_CURRENT_ACCOUNT(state, current_account) {
+      state.current_account = current_account;
+    },
   },
   actions: {
     fetchCurrentAccountStatus({ commit, rootState }) {
@@ -45,6 +48,26 @@ export default {
         })
         .then((resp) => {
           commit("SET_CURRENT_ACCOUNT_STATUS", resp.data["account_status"]);
+        })
+        .catch((err) => {
+          let error = err.response.data.error;
+
+          console.error(error);
+        });
+    },
+    changeCurrentAccountStatus({ commit, rootState }) {
+      axios
+        .put(`/accounts/${rootState.user.current_account}/status`, null, {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "x-access-token": rootState.auth.access_token,
+          },
+        })
+        .then(() => {
+          commit(
+            "SET_CURRENT_ACCOUNT_STATUS",
+            !rootState.user.current_account_status
+          );
         })
         .catch((err) => {
           let error = err.response.data.error;

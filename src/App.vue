@@ -35,11 +35,11 @@ body {
   height: 100vh;
   background-color: $secondary-dark;
   display: flex;
+  overflow: auto;
 }
 
 #app-container {
   position: relative;
-  padding: 1em;
   width: 100%;
 }
 
